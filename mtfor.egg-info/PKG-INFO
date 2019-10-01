@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: mtfor
+Version: 0.0.1
+Summary: Plug 'n' play multithreaded for
+Home-page: https://github.com/solanav/mtfor
+Author: Antonio Solana
+Author-email: solanav@qq.com
+License: UNKNOWN
+Description: # MTFOR
+        
+        MTFOR or Multithreaded for is a simple package that provides a for loop that automatically distributes the processing through a number of threads.
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
