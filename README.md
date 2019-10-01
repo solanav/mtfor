@@ -31,4 +31,4 @@ print(modified_list)
 
 # Warning
 
-Multithreading is weird in the standard python implementation because of the GIL. You should try to use Jython, IronPython or any other implementation that allows free threads. Compiling to C with Cython should also work.
+Multithreading is weird in the standard python implementation because of the GIL. You should try to use Jython, IronPython or any other implementation that allows free threads.
