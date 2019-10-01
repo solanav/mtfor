@@ -4,11 +4,11 @@ from threading import Thread
 from queue import Queue
 
 
-def parts_per_thread(list_len, num_threads):
-    _parts_per_thread = []
+def __parts_per_thread(list_len, num_threads):
+    ppt = []
 
     for i in range(num_threads):
-        _parts_per_thread.append(list_len // num_threads)
+        ppt.append(list_len // num_threads)
 
     remainder = list_len % num_threads
 
@@ -16,47 +16,47 @@ def parts_per_thread(list_len, num_threads):
         if remainder == 0:
             break
 
-        _parts_per_thread[i] += 1
+        ppt[i] += 1
         remainder -= 1
 
-    return _parts_per_thread
+    return ppt
 
 
-def divide_list(_list, _parts_per_thread):
+def __divide_list(user_list, ppt):
     _list_list = []
-    for i in range(len(_parts_per_thread)):
+    for i in range(len(ppt)):
         ini = 0 if i == 0 else end
-        end = ini + _parts_per_thread[i]
-        _list_list.append(_list[ini:end])
+        end = ini + ppt[i]
+        _list_list.append(user_list[ini:end])
 
     return _list_list
 
 
-def apply_function(_id, _list, function):
-    result = list(map(function, _list))
+def __apply_function(_id, user_list, function):
+    result = list(map(function, user_list))
     return (_id, result)
 
 
-def mtfor(_list, function, num_threads):
+def mtfor(user_list, function, num_threads):
     if (num_threads <= 0):
         raise Exception("Error, number of threads cannot be <= 0")
 
-    list_len = len(_list)
+    list_len = len(user_list)
 
-    if (len(_list) <= 0):
+    if (len(user_list) <= 0):
         raise Exception("Error, list cannot have length <= 0")
 
     queue = Queue()
 
-    # Divide the _list
-    _parts_per_thread = parts_per_thread(list_len, num_threads)
-    _list_list = divide_list(_list, _parts_per_thread)
+    # Divide the user_list
+    ppt = __parts_per_thread(list_len, num_threads)
+    _list_list = __divide_list(user_list, ppt)
 
     # Create threads
     thread_list = []
     _id = 0
     for l in _list_list:
-        t = Thread(target=lambda q, l, function: q.put(apply_function(
+        t = Thread(target=lambda q, l, function: q.put(__apply_function(
             _id, l, function)), args=(queue, l, function,), daemon=True)
         t.start()
         thread_list.append(t)
