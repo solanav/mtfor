@@ -1,6 +1,6 @@
 # What is mtfor
 
-"mtfor" or "multithreaded for" is a simple package that provides a for loop that automatically distributes the processing through a number of threads.
+"mtfor" or "multithreaded for" is a simple package that provides a map() equivalent that automatically distributes the processing through a number of threads.
 
 # Installation
 
